@@ -55,7 +55,7 @@
       "name": "pekers",
       "image_path": "uploads/1775816271145-588791103.jpg",
       "eliminated": true,
-      "eliminated_at": "2026-04-10T15:34:25.079Z"
+      "eliminated_at": "2026-04-10T15:45:44.449Z"
     },
     {
       "id": 6,
@@ -97,7 +97,7 @@
       "contestant_id": 2,
       "category_id": 1,
       "score_value": 12,
-      "timestamp": "2026-04-10T13:18:23.539Z"
+      "timestamp": "2026-04-10T15:46:31.992Z"
     },
     {
       "id": 3,
@@ -105,7 +105,7 @@
       "contestant_id": 3,
       "category_id": 1,
       "score_value": 12,
-      "timestamp": "2026-04-10T13:18:23.539Z"
+      "timestamp": "2026-04-10T15:46:31.992Z"
     },
     {
       "id": 4,
@@ -129,7 +129,7 @@
       "contestant_id": 6,
       "category_id": 1,
       "score_value": 12,
-      "timestamp": "2026-04-10T13:18:23.539Z"
+      "timestamp": "2026-04-10T15:46:31.992Z"
     },
     {
       "id": 7,
@@ -144,8 +144,8 @@
       "judge_id": 1,
       "contestant_id": 2,
       "category_id": 2,
-      "score_value": 21,
-      "timestamp": "2026-04-10T13:18:23.539Z"
+      "score_value": 100,
+      "timestamp": "2026-04-10T15:46:31.992Z"
     },
     {
       "id": 9,
@@ -153,7 +153,7 @@
       "contestant_id": 3,
       "category_id": 2,
       "score_value": 12,
-      "timestamp": "2026-04-10T13:18:23.539Z"
+      "timestamp": "2026-04-10T15:46:31.992Z"
     },
     {
       "id": 10,
@@ -177,7 +177,7 @@
       "contestant_id": 6,
       "category_id": 2,
       "score_value": 21,
-      "timestamp": "2026-04-10T13:18:23.539Z"
+      "timestamp": "2026-04-10T15:46:31.992Z"
     }
   ]
 }
