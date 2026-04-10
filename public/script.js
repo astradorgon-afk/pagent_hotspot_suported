@@ -1003,8 +1003,8 @@ async function handleJudgePasswordReset(event) {
         return;
     }
 
-    if (password.length < 6) {
-        setStatus('judgePassResetMsg', 'New password must be at least 6 characters.', 'danger');
+    if (!password.length) {
+        setStatus('judgePassResetMsg', 'Enter a new password.', 'danger');
         return;
     }
 

@@ -230,11 +230,15 @@ function validateJudgeInput({ name, username, password }, options = {}) {
     }
 
     if (requirePassword) {
-        if (typeof password !== 'string' || password.length < 6) {
-            return { message: 'Judge password must be at least 6 characters.' };
+        if (typeof password !== 'string' || password.length === 0) {
+            return { message: 'Judge password is required.' };
         }
-    } else if (password && password.length < 6) {
-        return { message: 'Judge password must be at least 6 characters.' };
+    } else if (
+        password !== undefined &&
+        password !== null &&
+        typeof password !== 'string'
+    ) {
+        return { message: 'Judge password is invalid.' };
     }
 
     return {
@@ -934,8 +938,8 @@ app.post('/api/admin/judges/:id/reset-password', adminAuth, async (req, res) => 
         return;
     }
 
-    if (typeof password !== 'string' || password.length < 6) {
-        res.status(400).json({ message: 'New password must be at least 6 characters.' });
+    if (typeof password !== 'string' || password.length === 0) {
+        res.status(400).json({ message: 'New password is required.' });
         return;
     }
 

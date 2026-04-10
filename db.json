@@ -26,8 +26,8 @@
       "id": 1,
       "name": "waldo",
       "image_path": "uploads/053f85d7d59904636c7038274d4d2d85",
-      "eliminated": false,
-      "eliminated_at": null
+      "eliminated": true,
+      "eliminated_at": "2026-04-10T15:34:53.039Z"
     },
     {
       "id": 2,
@@ -47,15 +47,15 @@
       "id": 4,
       "name": "sarandi pakardi",
       "image_path": "uploads/1775816247615-776216546.jpg",
-      "eliminated": false,
-      "eliminated_at": null
+      "eliminated": true,
+      "eliminated_at": "2026-04-10T15:34:25.079Z"
     },
     {
       "id": 5,
       "name": "pekers",
       "image_path": "uploads/1775816271145-588791103.jpg",
-      "eliminated": false,
-      "eliminated_at": null
+      "eliminated": true,
+      "eliminated_at": "2026-04-10T15:34:25.079Z"
     },
     {
       "id": 6,

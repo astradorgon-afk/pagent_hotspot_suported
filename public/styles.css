@@ -593,9 +593,9 @@ p {
 }
 
 .entity-status.is-eliminated {
-    color: #e0c7a0;
-    background: rgba(140, 108, 61, 0.2);
-    border: 1px solid rgba(182, 144, 86, 0.18);
+    color: #ffd7d7;
+    background: rgba(242, 124, 124, 0.16);
+    border: 1px solid rgba(242, 124, 124, 0.38);
 }
 
 .entity-row.is-eliminated .entity-thumb img,
