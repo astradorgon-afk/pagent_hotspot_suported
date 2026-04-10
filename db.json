@@ -1,0 +1,183 @@
+{
+  "admins": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "$2b$10$P/v4UwjMSmAum5NGKxn3Nu89DSNq43PJbSKDnRr6ZLML8u6lTq3gC",
+      "name": "Admin"
+    }
+  ],
+  "judges": [
+    {
+      "id": 1,
+      "name": "wilfred",
+      "username": "admin",
+      "password": "$2b$10$tsxD/d27BTyYAYm6nhbn0unHl/MC6sVXfBAqeG7p5IXocDzTuIILe"
+    },
+    {
+      "id": 2,
+      "name": "Decimal Test",
+      "username": "decimal_test_temp",
+      "password": "$2b$10$xVWM33GZ0wgqObIOHIAXT.sRMZ4l82xBjJyS4NLnXIj4bU/ZzLVuW"
+    }
+  ],
+  "contestants": [
+    {
+      "id": 1,
+      "name": "waldo",
+      "image_path": "uploads/053f85d7d59904636c7038274d4d2d85",
+      "eliminated": false,
+      "eliminated_at": null
+    },
+    {
+      "id": 2,
+      "name": "skewerts",
+      "image_path": "uploads/1775816154273-22275594.jpg",
+      "eliminated": false,
+      "eliminated_at": null
+    },
+    {
+      "id": 3,
+      "name": "qweqwe",
+      "image_path": "uploads/1775816229906-565282960.jpg",
+      "eliminated": false,
+      "eliminated_at": null
+    },
+    {
+      "id": 4,
+      "name": "sarandi pakardi",
+      "image_path": "uploads/1775816247615-776216546.jpg",
+      "eliminated": false,
+      "eliminated_at": null
+    },
+    {
+      "id": 5,
+      "name": "pekers",
+      "image_path": "uploads/1775816271145-588791103.jpg",
+      "eliminated": false,
+      "eliminated_at": null
+    },
+    {
+      "id": 6,
+      "name": "logo ko",
+      "image_path": "uploads/1775816301271-499150418.png",
+      "eliminated": false,
+      "eliminated_at": null
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Talent",
+      "percentage": 40
+    },
+    {
+      "id": 2,
+      "name": "Evening Gown",
+      "percentage": 30
+    },
+    {
+      "id": 3,
+      "name": "Interview",
+      "percentage": 30
+    }
+  ],
+  "scores": [
+    {
+      "id": 1,
+      "judge_id": 1,
+      "contestant_id": 1,
+      "category_id": 1,
+      "score_value": 21,
+      "timestamp": "2026-04-10T13:18:23.538Z"
+    },
+    {
+      "id": 2,
+      "judge_id": 1,
+      "contestant_id": 2,
+      "category_id": 1,
+      "score_value": 12,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 3,
+      "judge_id": 1,
+      "contestant_id": 3,
+      "category_id": 1,
+      "score_value": 12,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 4,
+      "judge_id": 1,
+      "contestant_id": 4,
+      "category_id": 1,
+      "score_value": 12,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 5,
+      "judge_id": 1,
+      "contestant_id": 5,
+      "category_id": 1,
+      "score_value": 12,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 6,
+      "judge_id": 1,
+      "contestant_id": 6,
+      "category_id": 1,
+      "score_value": 12,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 7,
+      "judge_id": 1,
+      "contestant_id": 1,
+      "category_id": 2,
+      "score_value": 21,
+      "timestamp": "2026-04-10T10:50:39.639Z"
+    },
+    {
+      "id": 8,
+      "judge_id": 1,
+      "contestant_id": 2,
+      "category_id": 2,
+      "score_value": 21,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 9,
+      "judge_id": 1,
+      "contestant_id": 3,
+      "category_id": 2,
+      "score_value": 12,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 10,
+      "judge_id": 1,
+      "contestant_id": 4,
+      "category_id": 2,
+      "score_value": 11.98,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 11,
+      "judge_id": 1,
+      "contestant_id": 5,
+      "category_id": 2,
+      "score_value": 12,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    },
+    {
+      "id": 12,
+      "judge_id": 1,
+      "contestant_id": 6,
+      "category_id": 2,
+      "score_value": 21,
+      "timestamp": "2026-04-10T13:18:23.539Z"
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Pageant</title>
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="vendor/fonts/manrope/wght.css">
+    <link rel="stylesheet" href="vendor/fonts/playfair-display/wght.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-shell fade-in" data-page="admin">
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-crown me-2 text-accent"></i>Pageant
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav" aria-controls="adminNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Judge Login</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="admin.html">Admin Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="elimination.html">Elimination</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <section id="adminLogin" class="panel auth-panel mx-auto" style="max-width: 520px;">
+            <p class="section-label">Organizer Access</p>
+            <h1>Admin Dashboard</h1>
+            <p class="section-copy mt-3 mb-4">
+                Manage contestants, judges, scoring categories, and the live leaderboard from one screen.
+            </p>
+            <form id="adminLoginForm" class="stack-form">
+                <div>
+                    <label for="adminUsername" class="form-label">Username</label>
+                    <input type="text" id="adminUsername" class="form-control" autocomplete="username" placeholder="Admin username" required>
+                </div>
+                <div>
+                    <label for="adminPassword" class="form-label">Password</label>
+                    <input type="password" id="adminPassword" class="form-control" autocomplete="current-password" placeholder="Admin password" required>
+                </div>
+                <p class="auth-note">Default first-time login: <strong>admin</strong> / <strong>password</strong></p>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fa-solid fa-lock-open me-2"></i>Enter Dashboard
+                </button>
+                <div id="adminLoginMessage" class="status-message" aria-live="polite"></div>
+            </form>
+        </section>
+
+        <section id="adminContent" class="d-none">
+            <div class="dashboard-head">
+                <div>
+                    <p class="section-label">Control Center</p>
+                    <h1>Pageant Setup and Monitoring</h1>
+                    <p class="section-copy mt-3">
+                        Keep the score configuration balanced, add or update participants, and watch results move in real time.
+                    </p>
+                </div>
+                <div class="toolbar-actions">
+                    <a href="index.html" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-arrow-left me-2"></i>Judge Portal
+                    </a>
+                    <a href="elimination.html" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-list-check me-2"></i>Elimination Page
+                    </a>
+                    <button id="adminLogoutBtn" class="btn btn-outline-light">
+                        <i class="fa-solid fa-right-from-bracket me-2"></i>Log Out
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="metric-label">Contestants</div>
+                    <div class="metric-value" id="summaryContestants">0</div>
+                    <div class="metric-hint">Active in the contest</div>
+                </div>
+                <div class="stat-card">
+                    <div class="metric-label">Judges</div>
+                    <div class="metric-value" id="summaryJudges">0</div>
+                    <div class="metric-hint">Accounts ready to log in</div>
+                </div>
+                <div class="stat-card">
+                    <div class="metric-label">Categories</div>
+                    <div class="metric-value" id="summaryCategories">0</div>
+                    <div class="metric-hint">Scoring areas in use</div>
+                </div>
+                <div class="stat-card" id="summaryWeightCard">
+                    <div class="metric-label">Weight Total</div>
+                    <div class="metric-value" id="summaryWeight">0%</div>
+                    <div class="metric-hint" id="weightSummaryHint">Weights should total 100%.</div>
+                </div>
+            </div>
+
+            <div class="row g-4 align-items-start">
+                <div class="col-xl-7">
+                    <div class="panel crud-panel">
+                        <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="contestants-tab" data-bs-toggle="tab" data-bs-target="#contestants-pane" type="button" role="tab" aria-controls="contestants-pane" aria-selected="true">
+                                    <i class="fa-solid fa-user-group me-2"></i>Contestants
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="judges-tab" data-bs-toggle="tab" data-bs-target="#judges-pane" type="button" role="tab" aria-controls="judges-pane" aria-selected="false">
+                                    <i class="fa-solid fa-gavel me-2"></i>Judges
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories-pane" type="button" role="tab" aria-controls="categories-pane" aria-selected="false">
+                                    <i class="fa-solid fa-list-check me-2"></i>Categories
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="contestants-pane" role="tabpanel" aria-labelledby="contestants-tab">
+                                <p class="section-label">Roster</p>
+                                <h2>Contestants</h2>
+                                <p class="section-copy mt-2">
+                                    Add each contestant once and keep the roster updated here. Use the separate elimination page when you need to cut contestants for the next round.
+                                </p>
+                                <form id="addContestantForm" class="stack-form mt-4" enctype="multipart/form-data">
+                                    <div>
+                                        <label for="contestantName" class="form-label">Contestant Name</label>
+                                        <input type="text" id="contestantName" name="name" class="form-control" placeholder="Enter contestant name" required>
+                                    </div>
+                                    <div>
+                                        <label for="contestantImage" class="form-label">Photo</label>
+                                        <input type="file" id="contestantImage" name="image" class="form-control" accept="image/*">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-plus me-2"></i>Add Contestant
+                                    </button>
+                                    <a href="elimination.html" class="btn btn-outline-secondary">
+                                        <i class="fa-solid fa-user-slash me-2"></i>Open Elimination Page
+                                    </a>
+                                    <div id="contestantsMessage" class="status-message" aria-live="polite"></div>
+                                </form>
+
+                                <hr class="panel-divider">
+                                <div id="contestantsList" class="panel-list"></div>
+                            </div>
+
+                            <div class="tab-pane fade" id="judges-pane" role="tabpanel" aria-labelledby="judges-tab">
+                                <p class="section-label">Accounts</p>
+                                <h2>Judges</h2>
+                                <p class="section-copy mt-2">
+                                    Create unique login credentials for each judge and reset them when needed.
+                                </p>
+                                <form id="addJudgeForm" class="stack-form mt-4">
+                                    <div class="field-grid two-col">
+                                        <div>
+                                            <label for="newJudgeName" class="form-label">Judge Name</label>
+                                            <input type="text" id="newJudgeName" class="form-control" placeholder="Full name" required>
+                                        </div>
+                                        <div>
+                                            <label for="newJudgeUsername" class="form-label">Username</label>
+                                            <input type="text" id="newJudgeUsername" class="form-control" placeholder="Login username" required>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="newJudgePassword" class="form-label">Password</label>
+                                        <input type="password" id="newJudgePassword" class="form-control" placeholder="At least 6 characters" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-plus me-2"></i>Add Judge
+                                    </button>
+                                    <div id="judgesMessage" class="status-message" aria-live="polite"></div>
+                                </form>
+
+                                <hr class="panel-divider">
+                                <div id="judgesList" class="panel-list"></div>
+
+                                <hr class="panel-divider">
+                                <p class="section-label">Password Reset</p>
+                                <h3>Reset Judge Password</h3>
+                                <form id="resetJudgePasswordForm" class="stack-form mt-3">
+                                    <div>
+                                        <label for="judgeToReset" class="form-label">Judge</label>
+                                        <select id="judgeToReset" class="form-select" required></select>
+                                    </div>
+                                    <div>
+                                        <label for="newJudgePass" class="form-label">New Password</label>
+                                        <input type="password" id="newJudgePass" class="form-control" placeholder="At least 6 characters" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-secondary">
+                                        <i class="fa-solid fa-key me-2"></i>Reset Password
+                                    </button>
+                                    <div id="judgePassResetMsg" class="status-message" aria-live="polite"></div>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane fade" id="categories-pane" role="tabpanel" aria-labelledby="categories-tab">
+                                <p class="section-label">Rubric</p>
+                                <h2>Scoring Categories</h2>
+                                <p class="section-copy mt-2">
+                                    Each category needs a weight. The full scoring rubric should total 100%.
+                                </p>
+                                <form id="addCategoryForm" class="stack-form mt-4">
+                                    <div class="field-grid two-col">
+                                        <div>
+                                            <label for="newCategoryName" class="form-label">Category Name</label>
+                                            <input type="text" id="newCategoryName" class="form-control" placeholder="Talent, Interview, etc." required>
+                                        </div>
+                                        <div>
+                                            <label for="newCategoryPercentage" class="form-label">Weight (%)</label>
+                                            <input type="number" id="newCategoryPercentage" class="form-control" placeholder="0-100" min="1" max="100" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-plus me-2"></i>Add Category
+                                    </button>
+                                    <div id="categoriesMessage" class="status-message" aria-live="polite"></div>
+                                </form>
+
+                                <hr class="panel-divider">
+                                <div class="weight-summary">
+                                    <div>
+                                        <div class="metric-label">Current Total</div>
+                                        <strong id="totalPercentage">0%</strong>
+                                    </div>
+                                    <div id="categoryWeightHelper" class="helper-text">Weights should total 100% before judging starts.</div>
+                                </div>
+                                <div id="categoriesList" class="panel-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-5">
+                    <div class="d-grid gap-4">
+                        <div class="panel utility-panel">
+                            <div class="section-heading">
+                                <div>
+                                    <p class="section-label">Results</p>
+                                    <h2>Live Leaderboard</h2>
+                                </div>
+                                <p id="leaderboardStatus" class="section-copy">Waiting for the first update.</p>
+                            </div>
+                            <div id="leaderboard">
+                                <div class="empty-state">No scores have been submitted yet.</div>
+                            </div>
+                        </div>
+
+                        <div class="panel utility-panel">
+                            <p class="section-label">Security</p>
+                            <h2>Change Admin Password</h2>
+                            <p class="section-copy mt-2">
+                                Update the admin password after first login or whenever access changes.
+                            </p>
+                            <form id="changeAdminPasswordForm" class="stack-form mt-4">
+                                <div>
+                                    <label for="currentAdminPass" class="form-label">Current Password</label>
+                                    <input type="password" id="currentAdminPass" class="form-control" required>
+                                </div>
+                                <div class="field-grid two-col">
+                                    <div>
+                                        <label for="newAdminPass" class="form-label">New Password</label>
+                                        <input type="password" id="newAdminPass" class="form-control" placeholder="At least 6 characters" required>
+                                    </div>
+                                    <div>
+                                        <label for="confirmAdminPass" class="form-label">Confirm Password</label>
+                                        <input type="password" id="confirmAdminPass" class="form-control" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-shield-halved me-2"></i>Update Password
+                                </button>
+                                <div id="adminPassMessage" class="status-message" aria-live="polite"></div>
+                            </form>
+                        </div>
+
+                        <div class="panel utility-panel">
+                            <p class="section-label">Danger Zone</p>
+                            <h2>Reset All Data</h2>
+                            <p class="section-copy mt-2">
+                                This removes all contestants, judges, and scores, then restores the default scoring categories.
+                            </p>
+                            <button id="deleteAllDataBtn" class="btn btn-danger mt-4">
+                                <i class="fa-solid fa-triangle-exclamation me-2"></i>Reset Pageant Data
+                            </button>
+                            <div id="dangerZoneMessage" class="status-message mt-3" aria-live="polite"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

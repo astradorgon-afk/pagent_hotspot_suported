@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pageant Scoring Portal</title>
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="vendor/fonts/manrope/wght.css">
+    <link rel="stylesheet" href="vendor/fonts/playfair-display/wght.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-shell fade-in" data-page="home">
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-crown me-2 text-accent"></i>Pageant
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Judge Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <section class="hero-grid align-items-stretch">
+            <div class="panel hero-panel d-flex flex-column justify-content-center">
+                <div class="hero-copy">
+                    <p class="section-label">Live Scoring System</p>
+                    <h1>Judging that stays fast, clear, and easy to track.</h1>
+                    <p class="section-copy mt-3">
+                        Judges can sign in, submit scores, and update them at any time. Organizers see the leaderboard refresh in real time without reloading the page.
+                    </p>
+                    <div class="hero-points">
+                        <div class="hero-point">
+                            <i class="fa-solid fa-user-check"></i>
+                            <span>Judge login uses the credentials assigned by the organizer.</span>
+                        </div>
+                        <div class="hero-point">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span>Each contestant is scored per category on a 0 to 100 scale with decimal support.</span>
+                        </div>
+                        <div class="hero-point">
+                            <i class="fa-solid fa-tower-broadcast"></i>
+                            <span>The leaderboard updates instantly as scores are submitted.</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <a href="admin.html" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-sliders me-2"></i>Open Admin Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel login-panel">
+                <p class="section-label">Judge Access</p>
+                <h2>Sign In</h2>
+                <p class="section-copy mt-2 mb-4">
+                    Enter your assigned username and password to open your score sheet.
+                </p>
+                <form id="judgeLoginForm" class="stack-form">
+                    <div>
+                        <label for="judgeUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="judgeUsername" autocomplete="username" required>
+                    </div>
+                    <div>
+                        <label for="judgePassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="judgePassword" autocomplete="current-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>Open Score Sheet
+                    </button>
+                    <div id="loginMessage" class="status-message" aria-live="polite"></div>
+                </form>
+            </div>
+        </section>
+
+        <section class="panel leaderboard-panel mt-4 mt-lg-5">
+            <div class="section-heading">
+                <div>
+                    <p class="section-label">Live Results</p>
+                    <h2>Leaderboard</h2>
+                </div>
+                <p id="leaderboardStatus" class="section-copy">Waiting for the first update.</p>
+            </div>
+            <div id="leaderboard">
+                <div class="empty-state">Waiting for scores to appear.</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elimination Control | Pageant</title>
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="vendor/fonts/manrope/wght.css">
+    <link rel="stylesheet" href="vendor/fonts/playfair-display/wght.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-shell fade-in" data-page="elimination">
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-crown me-2 text-accent"></i>Pageant
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#eliminationNav" aria-controls="eliminationNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="eliminationNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Judge Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="elimination.html">Elimination</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <section id="eliminationContent">
+            <div class="dashboard-head">
+                <div>
+                    <p class="section-label">Round Management</p>
+                    <h1>Elimination Control</h1>
+                    <p class="section-copy mt-3">
+                        Review the current ranking, check contestants, and decide whether the checked group is eliminated or moved to the next round.
+                    </p>
+                </div>
+                <div class="toolbar-actions">
+                    <a href="admin.html" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-arrow-left me-2"></i>Back to Dashboard
+                    </a>
+                    <button id="refreshEliminationBtn" class="btn btn-outline-secondary" type="button">
+                        <i class="fa-solid fa-rotate me-2"></i>Refresh Ranking
+                    </button>
+                    <button id="adminLogoutBtn" class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-right-from-bracket me-2"></i>Log Out
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="metric-label">Active Contestants</div>
+                    <div class="metric-value" id="elimSummaryActive">0</div>
+                    <div class="metric-hint">Still eligible this round</div>
+                </div>
+                <div class="stat-card">
+                    <div class="metric-label">Eliminated</div>
+                    <div class="metric-value" id="elimSummaryEliminated">0</div>
+                    <div class="metric-hint">Already out of the contest</div>
+                </div>
+                <div class="stat-card">
+                    <div class="metric-label">Selected</div>
+                    <div class="metric-value" id="elimSummarySelected">0</div>
+                    <div class="metric-hint">Currently checked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="metric-label">Visible List</div>
+                    <div class="metric-value" id="elimSummaryVisible">0</div>
+                    <div class="metric-hint" id="elimVisibleHint">All active contestants</div>
+                </div>
+            </div>
+
+            <div class="row g-4 align-items-start">
+                <div class="col-xl-8">
+                    <div class="panel crud-panel">
+                        <p class="section-label">Ranking Board</p>
+                        <h2>Choose Contestants</h2>
+                        <p class="section-copy mt-2">
+                            Use the filters to focus on the top 10 or everyone below the top 10. Then choose how checked contestants should be treated.
+                        </p>
+
+                        <div class="selection-toolbar mt-4">
+                            <div class="filter-chip-group" id="eliminationFilters">
+                                <button type="button" class="btn btn-primary btn-sm" data-filter="all">All Active</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" data-filter="top10">Top 10</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" data-filter="below10">Below Top 10</button>
+                            </div>
+                            <div class="toolbar-actions">
+                                <button id="selectVisibleBtn" class="btn btn-outline-secondary btn-sm" type="button">
+                                    <i class="fa-regular fa-square-check me-2"></i>Select Visible
+                                </button>
+                                <button id="clearSelectionBtn" class="btn btn-outline-secondary btn-sm" type="button">
+                                    <i class="fa-regular fa-square me-2"></i>Clear Selection
+                                </button>
+                            </div>
+                        </div>
+
+                        <form id="eliminationForm" class="stack-form mt-4">
+                            <div class="action-option-grid">
+                                <label class="action-option">
+                                    <input type="radio" name="mode" value="eliminate-selected" checked>
+                                    <span class="action-option-copy">
+                                        <strong>Eliminate</strong>
+                                        <small>The checked contestants will be eliminated. Unchecked contestants stay active.</small>
+                                    </span>
+                                </label>
+                                <label class="action-option">
+                                    <input type="radio" name="mode" value="advance-selected">
+                                    <span class="action-option-copy">
+                                        <strong>Proceed To Next Round</strong>
+                                        <small>The checked contestants stay active. Every unchecked active contestant will be eliminated.</small>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="weight-summary mt-4">
+                                <div>
+                                    <div class="metric-label">Current Decision</div>
+                                    <strong id="eliminationDecisionLabel">0 contestants selected</strong>
+                                </div>
+                                <div id="eliminationDecisionHint" class="helper-text">
+                                    Checked contestants will be eliminated.
+                                </div>
+                            </div>
+
+                            <div id="eliminationMessage" class="status-message mt-3" aria-live="polite"></div>
+
+                            <div id="eliminationRankingList" class="panel-list ranked-list mt-4"></div>
+
+                            <button id="applyEliminationBtn" type="submit" class="btn btn-danger mt-4">
+                                <i class="fa-solid fa-user-slash me-2"></i>Apply Decision
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-xl-4">
+                    <div class="d-grid gap-4">
+                        <div class="panel utility-panel">
+                            <p class="section-label">Guide</p>
+                            <h2>How It Works</h2>
+                            <div class="guide-list mt-3">
+                                <p>Use <strong>Top 10</strong> if you want a quick semifinal cut.</p>
+                                <p>Choose <strong>Eliminate</strong> when checked names should be removed.</p>
+                                <p>Choose <strong>Proceed To Next Round</strong> when checked names should stay and everyone else should be cut.</p>
+                            </div>
+                        </div>
+
+                        <div class="panel utility-panel">
+                            <p class="section-label">Recovery</p>
+                            <h2>Restore Eliminated Contestants</h2>
+                            <p class="section-copy mt-2">
+                                If a contestant was removed by mistake, restore them here without deleting their saved scores.
+                            </p>
+                            <div id="restoreMessage" class="status-message mt-3" aria-live="polite"></div>
+                            <div id="eliminatedContestantsList" class="panel-list mt-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

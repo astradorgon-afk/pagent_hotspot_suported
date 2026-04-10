@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judge Score Sheet | Pageant</title>
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="vendor/fonts/manrope/wght.css">
+    <link rel="stylesheet" href="vendor/fonts/playfair-display/wght.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-shell fade-in" data-page="judge">
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-crown me-2 text-accent"></i>Pageant
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#judgeNav" aria-controls="judgeNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="judgeNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Judge Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="judge.html">Score Sheet</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+        <section class="page-header">
+            <div>
+                <p class="section-label">Judge Workspace</p>
+                <h1>Score Sheet</h1>
+                <p class="section-copy mt-3">
+                    Choose a category first, then score every contestant under that category from 0 to 100. Decimal scores are allowed.
+                </p>
+            </div>
+            <div class="panel judge-identity">
+                <div>
+                    <div class="metric-label">Signed In As</div>
+                    <strong id="judgeNameDisplay">Loading...</strong>
+                </div>
+                <button id="judgeLogoutBtn" class="btn btn-outline-light">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>Log Out
+                </button>
+            </div>
+        </section>
+
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-4 col-xl-3">
+                <aside class="panel score-summary sticky-panel">
+                    <p class="section-label">Progress</p>
+                    <h2>Scoring Summary</h2>
+                    <p id="scoreProgressText" class="section-copy mt-3">Loading the score sheet.</p>
+                    <div class="progress-track mt-3">
+                        <div id="scoreProgressBar" class="progress-value"></div>
+                    </div>
+                    <p id="scoreCompletionHint" class="helper-text mt-3"></p>
+
+                    <hr class="panel-divider">
+
+                    <p class="section-label">Categories</p>
+                    <div id="categoryLegend" class="legend-list"></div>
+                    <div id="judgeConfigWarning" class="status-message mt-3" aria-live="polite"></div>
+
+                    <button type="submit" form="scoringForm" class="btn btn-primary w-100 mt-4" id="submitScoresBtn">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>Save Scores
+                    </button>
+                    <div id="loadingSpinner" class="spinner-border mt-3" role="status" style="display: none;">
+                        <span class="visually-hidden">Saving scores</span>
+                    </div>
+                    <div id="submissionMessage" class="status-message mt-3" aria-live="polite"></div>
+                </aside>
+            </div>
+
+            <div class="col-lg-8 col-xl-9">
+                <form id="scoringForm">
+                    <div id="contestantsContainer">
+                        <div class="empty-state">Loading contestants and categories.</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
